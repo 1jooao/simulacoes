@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulacoes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+        .wall-simu{
+          width: 100%;
+          height: 100vh;
+        }
+        .form-sim{
+            width: 65vh;
+            position: absolute;
+            top: 17vh;
+            left: 30vh;
+            padding: 10px;
+            border-width: 2px;
+            border-style: groove;
+            border-radius: 10px;
+            border-color:  rgb(255, 255, 255);
+        }
+        .form-scnd{
+            width: 65vh;
+            position: absolute;
+            top: 17vh;
+            left: 100vh;
+            padding: 10px;
+            border-width: 2px;
+            border-style: groove;
+            border-radius: 10px;
+            border-color:  rgb(255, 255, 255);
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <nav  class="navbar fixed-top" style="background-color: rgb(0, 185, 0);">
+        <div class="container-fluid">
+          <a class="navbar-brand" id="pgsimule"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+              <div class="offcanvas-header ">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Configurações</h5>
+                <button type="button" class="btn-close btn btn-outline-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body">
+                <ul id="lista" class="navbar-nav list-group justify-content-end flex-grow-1 pe-3">
+                  <li class="nav-item">
+                    <a class="nav-link active text-white" aria-current="page" href="../html/home.html"><img src="../image/arrow-left-square.svg" alt="" width="10%" height="20vh">Voltar a home</a>
+                  </li>
+                  <li class="nav-item">
+                    <button class="nav-link text-white" id="deslog">log-out.</button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div>
+            <img src="../image/binwall.tmp" alt="" class="wall-simu">
+        </div>
+
+        <form class="form-sim " id="form-conta">
+            <h1 class="text-white">Simule Gastos</h1>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">Opções</label>
+                <select class="form-select" id="acao">
+                  <option selected>Escolha oque deseja simular...</option>
+                  <option value="1">Viagens</option>
+                  <option value="2">Festas</option>
+                  <option value="3">Metas</option>
+                  <option value="4">Outros</option>
+                </select>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                <label for="floatingInputDisabled">Agora, Informe de quanto sera o gasto.</label>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">$</span>
+                <input type="number" id="val-acao" class="form-control" placeholder="Apenas Números..." aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-text">.00</span>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                <label for="floatingInputDisabled">Agora, Informe qual sua renda mensal.</label>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">$</span>
+                <input type="number" id="val-renda" class="form-control" placeholder="Apenas Números..." aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-text">.00</span>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                <label for="floatingInputDisabled">Agora, Informe qual seu gasto mensal.</label>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">$</span>
+                <input type="number" id="val=gasto" class="form-control" placeholder="Apenas Números..." aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-text">.00</span>
+              </div>
+        </form>
+        <form class="form-scnd" id="form-conta">
+            <h1 class="text-white">Entre viagens, festas...</h1>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInputDisabled"  disabled>
+                <label for="floatingInputDisabled">Digite o numero em meses que faltam para sua ação.</label>
+              </div>
+              <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text" id="addon-wrapping">meses</span>
+                <input type="number" id="qtd-mes" class="form-control" placeholder="Numero em meses" aria-label="Username" aria-describedby="addon-wrapping">
+              </div>
+              <div class="form-floating mb-3">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextareaDisabled" disabled></textarea>
+                <label id="result-total" for="floatingTextareaDisabled">execute no botão abaixo.</label>
+              </div>
+              <button class="btn btn-success" type="button" id="bCalcule" onclick="simulacaoTotal()">Simular</button>
+                <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="verifyField()">
+                Salve Aqui
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Salvar Simulação</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div  class="modal-body">
+                      <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextareaDisabled" disabled></textarea>
+                        <label id="text-modal" for="floatingTextareaDisabled">execute no botão abaixo.</label>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                      <button type="button" class="btn btn-primary">Salvar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </form>
+
+
+<script>
+    nome = localStorage.getItem('nome');
+    document.getElementById('pgsimule').innerText = ` Bem-Vindo a simulações ${nome || ' nome'}`;
+
+function simulacaoTotal(){
+  const gastoAc = document.getElementById('val-acao').value;
+  const renda = document.getElementById('val-renda').value;
+  const gastoMen = document.getElementById('val=gasto').value;
+  const qtdMes = document.getElementById('qtd-mes').value;
+  
+  if (gastoAc == '' && renda == '' && gastoMen == '' && qtdMes == ''){
+      alert("preencha todos os campos necessários.");
+  } 
+    const equacao1 = renda - gastoMen;
+    const equacao2 = gastoAc / qtdMes;
+    const equacao3 = equacao1 - equacao2;
+    
+    document.getElementById('result-total').innerText = `Seu valor restante por mês é de R$${equacao1}. 
+    Você tera que juntar R$${equacao2} por mes durante ${qtdMes} meses.
+    Restará R$${equacao3} por mes.`;
+}
+function verifyField(){
+  const gastoAc = document.getElementById('val-acao').value;
+  const renda = document.getElementById('val-renda').value;
+  const gastoMen = document.getElementById('val=gasto').value;
+  const qtdMes = document.getElementById('qtd-mes').value;
+  var selectElement = document.getElementById('acao');
+
+  // Obtém o índice da opção selecionada
+  var selectedIndex = selectElement.selectedIndex;
+
+  // Obtém o texto da opção selecionada
+  var selectedOptionText = selectElement.options[selectedIndex].text;
+
+
+  const equacao1 = renda - gastoMen;
+  const equacao2 = gastoAc / qtdMes;
+  const equacao3 = equacao1 - equacao2;
+  equacao2.toFixed(2);
+  equacao3.toFixed(2);
+
+  document.getElementById('text-modal').innerText = `Simulação
+  R$${renda} Esta é sua renda mensal. 
+  R$${gastoMen} Este é seu gasto mensal.
+  R$${equacao1} Isso é quanto resta por mês.
+  
+  ${qtdMes} Mêses para seu(sua) ${selectedOptionText}
+  R$${gastoAc} Isso é quanto terá que gastar para seu(sua) ${selectedOptionText}.
+  R$${equacao2} Isso é quanto que tera que juntar durantes os ${qtdMes} Mêses.
+  
+  R$${equacao3} Isso é quanto que sobrara por mês.`;
+
+
+}
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</body>
+</html>
