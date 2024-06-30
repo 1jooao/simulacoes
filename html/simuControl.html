@@ -15,7 +15,7 @@
             width: 65vh;
             position: absolute;
             top: 17vh;
-            left: 30vh;
+            left: 20vh;
             padding: 10px;
             border-width: 2px;
             border-style: groove;
@@ -26,14 +26,28 @@
             width: 65vh;
             position: absolute;
             top: 17vh;
-            left: 100vh;
+            left: 90vh;
             padding: 10px;
             border-width: 2px;
             border-style: groove;
             border-radius: 10px;
             border-color:  rgb(255, 255, 255);
         }
-        
+        .saved{
+          position: absolute;
+          top: 17vh;
+          left: 160vh;
+          display: grid;
+          border-width: 2px;
+          border-style: groove;
+          border-radius: 10px;
+          border-color: white;
+          padding: 10px;
+        }
+        .saved h1{
+          font-size: 35px;
+          color: white;
+        }
     </style>
 </head>
 <body>
@@ -50,7 +64,7 @@
                 <button type="button" class="btn-close btn btn-outline-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
               </div>
               <div class="offcanvas-body">
-                <ul id="lista" class="navbar-nav list-group justify-content-end flex-grow-1 pe-3">
+                <ul class="navbar-nav list-group justify-content-end flex-grow-1 pe-3">
                   <li class="nav-item">
                     <a class="nav-link active text-white" aria-current="page" href="../html/home.html"><img src="../image/arrow-left-square.svg" alt="" width="10%" height="20vh">Voltar a home</a>
                   </li>
@@ -122,33 +136,57 @@
               </div>
               <button class="btn btn-success" type="button" id="bCalcule" onclick="simulacaoTotal()">Simular</button>
                 <!-- Button trigger modal -->
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="verifyField()">
+              <button id="meuBotao" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="verifyField()">
                 Salve Aqui
               </button>
 
               <!-- Modal -->
-              <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Salvar Simulação</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </form>
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Salvar Simulação</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div  class="modal-body">
+                    <div class="form-floating mb-3">
+                      <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextareaDisabled" disabled></textarea>
+                      <label id="text-modal" for="floatingTextareaDisabled">execute no botão abaixo.</label>
                     </div>
-                    <div  class="modal-body">
-                      <div class="form-floating mb-3">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextareaDisabled" disabled></textarea>
-                        <label id="text-modal" for="floatingTextareaDisabled">execute no botão abaixo.</label>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                      <button type="button" class="btn btn-primary">Salvar</button>
-                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" onclick="saveSimula()">Salvar</button>
                   </div>
                 </div>
               </div>
-        </form>
+            </div>
+        
+            <div class="modal" tabindex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
+        <div class="saved"> 
+          <h1 class="title-saved">simulações salvas</h1>
+          <ul id="lista" class="simu-list text-white">
+          </ul>
+        </div>
+       
 
 <script>
     nome = localStorage.getItem('nome');
@@ -159,14 +197,14 @@ function simulacaoTotal(){
   const renda = document.getElementById('val-renda').value;
   const gastoMen = document.getElementById('val=gasto').value;
   const qtdMes = document.getElementById('qtd-mes').value;
-  
-  if (gastoAc == '' && renda == '' && gastoMen == '' && qtdMes == ''){
-      alert("preencha todos os campos necessários.");
-  } 
+
     const equacao1 = renda - gastoMen;
     const equacao2 = gastoAc / qtdMes;
     const equacao3 = equacao1 - equacao2;
-    
+    equacao1.toFixed(2);
+    equacao2.toFixed(2);
+    equacao3.toFixed(2);
+
     document.getElementById('result-total').innerText = `Seu valor restante por mês é de R$${equacao1}. 
     Você tera que juntar R$${equacao2} por mes durante ${qtdMes} meses.
     Restará R$${equacao3} por mes.`;
@@ -176,6 +214,13 @@ function verifyField(){
   const renda = document.getElementById('val-renda').value;
   const gastoMen = document.getElementById('val=gasto').value;
   const qtdMes = document.getElementById('qtd-mes').value;
+  var botao = document.getElementById("meuBotao");
+
+  
+if (gastoAc == '' && renda == '' && gastoMen == '' && qtdMes == ''){
+    alert("preencha todos os campos necessários.");
+    botao.disabled = true;
+}   
   var selectElement = document.getElementById('acao');
 
   // Obtém o índice da opção selecionada
@@ -188,10 +233,11 @@ function verifyField(){
   const equacao1 = renda - gastoMen;
   const equacao2 = gastoAc / qtdMes;
   const equacao3 = equacao1 - equacao2;
+  equacao1.toFixed(2);
   equacao2.toFixed(2);
   equacao3.toFixed(2);
 
-  document.getElementById('text-modal').innerText = `Simulação
+  const simulacao = document.getElementById('text-modal').innerText = `Simulação
   R$${renda} Esta é sua renda mensal. 
   R$${gastoMen} Este é seu gasto mensal.
   R$${equacao1} Isso é quanto resta por mês.
@@ -202,8 +248,24 @@ function verifyField(){
   
   R$${equacao3} Isso é quanto que sobrara por mês.`;
 
-
+  localStorage.setItem('text-modal', simulacao);
 }
+
+function saveSimula(){
+  const num = 0;
+  const lista = document.getElementById('lista');
+  const itemLista = document.createElement('li');
+  const botao = document.createElement('button');
+  botao.textContent = `simulação ${num, + 1}`;
+  itemLista.appendChild(botao);
+  lista.appendChild(itemLista);
+}
+
+
+
+
+
+
 
 </script>
 
